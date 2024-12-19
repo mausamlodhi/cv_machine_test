@@ -6,12 +6,13 @@ const { bookRepository } = repositories;
 export default {
   async createBook(req, res, next) {
     try {
+      console.log("xoxox",req.body)
       const {
-        body: { bookName, autherName, price, description },
+        body: { bookName, authorName, price, description },
       } = req;
       const bookData = {
         bookName,
-        autherName,
+        authorName,
         price,
         description,
       };

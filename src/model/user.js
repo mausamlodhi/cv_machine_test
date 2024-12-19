@@ -42,7 +42,7 @@ module.exports = (mongoose) => {
     const createAdminUser = async () => {
         try {
             const Role = mongoose.model('role');
-            const adminRole = await Role.findOne({ name: 'Admin' });
+            const adminRole = await Role.findOne({ roleName: 'Admin' });
 
             if (!adminRole) {
                 console.log('Admin role not found. Please create a role with the name "Admin" first.');

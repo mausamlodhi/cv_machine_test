@@ -25,11 +25,19 @@ export default {
         try{
             const bookData = await book.findById(id);
             if(bookData){
-                bookData.save(data);
-                return {
-                    status:true,
-                    data:null,
-                    message:'BOOK_UPDATED'
+                const result = await book.updateOne({ _id: id }, { $set: data });
+                if(result.acknowledged){
+                    return {
+                        status:true,
+                        data:null,
+                        message:'BOOK_UPDATED'
+                    }
+                }else{
+                    return {
+                        status:false,
+                        data:null,
+                        message:'BOOK_NOT_FOUND'
+                    }
                 }
             }else{
                 return {
@@ -56,8 +64,8 @@ export default {
         try{
             const chedkBook = await book.findById(id);
             if(chedkBook){
-                const isDeleted = await book.destroy({_id:id});
-                if(isDeleted){
+                const isDeleted = await book.deleteOne({_id:id});
+                if(isDeleted?.acknowledged){
                     return {
                         status:true,
                         message:'BOOK_DELETED'

@@ -31,18 +31,19 @@ export default {
         try{
             const userData = await user.findOne({email:data?.email});
             if(userData){
-                const isPasswordMatch = await bcrypt.compare(userData.password,data?.password);
+                const isPasswordMatch = await bcrypt.compare(data?.password,userData.password);
                 if(isPasswordMatch){
                     const refreshToken = jwt.sign({_id:userData?._id},process.env.JWT_SECRET_KEY,{expiresIn:'72h'});
-                    const accessToken = jwt.sign(userData,process.env.JWT_SECRET_KEY,{expiresIn:'2m'});
+                    const accessToken = jwt.sign({_id:userData?._id},process.env.JWT_SECRET_KEY,{expiresIn:'2m'});
                     userData.refreshToken = refreshToken;
+                    const data = {
+                        ...userData?._doc,
+                        accessToken
+                    };
                     userData.save();
                     return {
                         status:true,
-                        data:{
-                            ...userData,
-                            accessToken
-                        }
+                        data
                     }
                 }else{
                     return {

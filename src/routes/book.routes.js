@@ -6,12 +6,12 @@ const { bookController } = controllers;
 const { bookMiddleware } = middlewares;
 const router = Router();
 
-router.post('/',
+router.post('/add_book',
     bookMiddleware.checkBookExistance,
     bookController.createBook
 );
 
-router.get('/get_all_book',
+router.get('/get_all_books',
     bookController.getAllBooks
 );
 

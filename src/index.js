@@ -9,9 +9,9 @@ import routes from "./routes";
 export default class ServerClass {
   constructor(app) {
     this.app = app;
+    this.middleware();
     this.connectDB();
     this.route();
-    this.middleware();
     this.start();
   }
   middleware() {

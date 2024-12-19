@@ -1,8 +1,8 @@
 import multer from "multer";
 import httpStatus from "http-status";
 import path from "path";
-import repositories from "../repository";
-import config from "../config/dbConfig";
+import repositories from "../repositories";
+import config from "../config/index";
 const { mediaRepository } = repositories;
 
 const storage = multer.diskStorage({

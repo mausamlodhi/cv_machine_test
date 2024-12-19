@@ -6,6 +6,7 @@ const { accountRepository } = repositories;
 export default {
   async userSignup(req, res, next) {
     try {
+      console.log(req.body)
       const {
         body: { firstName, lastName, email, phoneNumber, password, role },
       } = req;
@@ -32,6 +33,7 @@ export default {
         });
       }
     } catch (error) {
+      console.log(error)
       showConsoleLogs(error);
       next(error);
     }
